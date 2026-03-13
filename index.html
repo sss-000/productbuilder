@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>간단한 계산기</title>
+  <style>
+    :root {
+      --bg: linear-gradient(160deg, #dbeafe, #f8fafc 55%, #fde68a);
+      --panel: #0f172a;
+      --display: #e2e8f0;
+      --key: #1e293b;
+      --key-alt: #334155;
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --text: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg);
+      padding: 24px;
+    }
+
+    .calculator {
+      width: min(100%, 360px);
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.28);
+    }
+
+    .title {
+      margin: 0 0 16px;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .display {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      background: var(--display);
+      color: #0f172a;
+      text-align: right;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--key);
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: var(--key-alt);
+    }
+
+    .operator,
+    .equals {
+      background: var(--accent);
+    }
+
+    .operator:hover,
+    .equals:hover {
+      background: var(--accent-hover);
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1 class="title">간단한 계산기</h1>
+    <input id="display" class="display" type="text" value="0" readonly>
+    <div class="keys">
+      <button type="button" onclick="clearDisplay()">C</button>
+      <button type="button" onclick="appendValue('.')">.</button>
+      <button type="button" onclick="deleteLast()">DEL</button>
+      <button type="button" class="operator" onclick="appendValue('/')">/</button>
+
+      <button type="button" onclick="appendValue('7')">7</button>
+      <button type="button" onclick="appendValue('8')">8</button>
+      <button type="button" onclick="appendValue('9')">9</button>
+      <button type="button" class="operator" onclick="appendValue('*')">*</button>
+
+      <button type="button" onclick="appendValue('4')">4</button>
+      <button type="button" onclick="appendValue('5')">5</button>
+      <button type="button" onclick="appendValue('6')">6</button>
+      <button type="button" class="operator" onclick="appendValue('-')">-</button>
+
+      <button type="button" onclick="appendValue('1')">1</button>
+      <button type="button" onclick="appendValue('2')">2</button>
+      <button type="button" onclick="appendValue('3')">3</button>
+      <button type="button" class="operator" onclick="appendValue('+')">+</button>
+
+      <button type="button" class="wide" onclick="appendValue('0')">0</button>
+      <button type="button" class="equals" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendValue(value) {
+      if (display.value === "0" && value !== ".") {
+        display.value = value;
+        return;
+      }
+
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = "0";
+    }
+
+    function deleteLast() {
+      display.value = display.value.length > 1 ? display.value.slice(0, -1) : "0";
+    }
+
+    function calculate() {
+      try {
+        const result = Function("return " + display.value)();
+        display.value = Number.isFinite(result) ? String(result) : "Error";
+      } catch (error) {
+        display.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
