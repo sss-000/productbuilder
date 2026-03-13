@@ -44,7 +44,8 @@
     }
 
     .hero,
-    .form-card {
+    .form-card,
+    .comments-card {
       background: var(--panel);
       backdrop-filter: blur(14px);
       border: 1px solid var(--panel-border);
@@ -118,13 +119,30 @@
       padding: 32px;
     }
 
+    .comments-card {
+      width: min(100%, 960px);
+      margin: 24px auto 0;
+      padding: 32px;
+    }
+
     .form-card h2 {
       margin: 0;
       font-size: 1.5rem;
     }
 
+    .comments-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+    }
+
     .form-card p {
       margin: 10px 0 24px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .comments-card p {
+      margin: 0 0 24px;
       color: var(--muted);
       line-height: 1.6;
     }
@@ -213,7 +231,8 @@
       }
 
       .hero,
-      .form-card {
+      .form-card,
+      .comments-card {
         padding: 24px;
         border-radius: 22px;
       }
@@ -307,5 +326,28 @@
       </form>
     </section>
   </main>
+
+  <section class="comments-card">
+    <h2>댓글</h2>
+    <p>문의 폼과 별도로 의견이나 피드백을 남길 수 있는 Disqus 댓글 영역입니다.</p>
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </section>
+
+  <script>
+    /*
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = "partnership-inquiry-page";
+    };
+    */
+    (function() {
+      var d = document;
+      var s = d.createElement("script");
+      s.src = "https://productbuilder-hqbka1jwhf.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 </body>
 </html>
