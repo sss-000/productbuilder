@@ -3,336 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>제휴 문의</title>
-  <style>
-    :root {
-      --bg-top: #f8f2e8;
-      --bg-bottom: #d8e6f2;
-      --panel: rgba(255, 255, 255, 0.88);
-      --panel-border: rgba(33, 37, 41, 0.08);
-      --text: #1f2933;
-      --muted: #52606d;
-      --accent: #c2410c;
-      --accent-hover: #9a3412;
-      --input: #ffffff;
-      --input-border: #d9e2ec;
-      --shadow: 0 24px 60px rgba(15, 23, 42, 0.15);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", "Malgun Gothic", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 28%),
-        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
-      padding: 32px 20px;
-    }
-
-    .page {
-      width: min(100%, 960px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .hero,
-    .form-card,
-    .comments-card {
-      background: var(--panel);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--panel-border);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 640px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(194, 65, 12, 0.1);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 18px 0 14px;
-      font-size: clamp(2.2rem, 5vw, 4.2rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-    }
-
-    .lead {
-      max-width: 28rem;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-
-    .points {
-      display: grid;
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .point {
-      padding: 16px 18px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(82, 96, 109, 0.12);
-    }
-
-    .point strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.98rem;
-    }
-
-    .point span {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .form-card {
-      padding: 32px;
-    }
-
-    .comments-card {
-      width: min(100%, 960px);
-      margin: 24px auto 0;
-      padding: 32px;
-    }
-
-    .form-card h2 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    .comments-card h2 {
-      margin: 0 0 10px;
-      font-size: 1.5rem;
-    }
-
-    .form-card p {
-      margin: 10px 0 24px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .comments-card p {
-      margin: 0 0 24px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    form {
-      display: grid;
-      gap: 16px;
-    }
-
-    .field-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    label {
-      display: grid;
-      gap: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--input-border);
-      border-radius: 16px;
-      background: var(--input);
-      padding: 14px 15px;
-      font: inherit;
-      color: var(--text);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: rgba(194, 65, 12, 0.55);
-      box-shadow: 0 0 0 4px rgba(194, 65, 12, 0.12);
-    }
-
-    textarea {
-      min-height: 160px;
-      resize: vertical;
-    }
-
-    .hint {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-
-    button {
-      border: 0;
-      border-radius: 18px;
-      padding: 16px 18px;
-      font: inherit;
-      font-weight: 700;
-      color: #fff;
-      background: var(--accent);
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      background: var(--accent-hover);
-    }
-
-    @media (max-width: 860px) {
-      .page {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-    }
-
-    @media (max-width: 560px) {
-      body {
-        padding: 18px 14px;
-      }
-
-      .hero,
-      .form-card,
-      .comments-card {
-        padding: 24px;
-        border-radius: 22px;
-      }
-
-      .field-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <meta name="description" content="브랜드 협업, 유통, 공동 캠페인 제안을 체계적으로 검토하는 제휴 문의 안내 사이트입니다. 운영 원칙, 검토 기준, 개인정보 처리 안내를 함께 제공합니다.">
+  <meta name="google-adsense-account" content="ca-pub-2947810987379877">
+  <title>Product Builder | 제휴 문의 안내</title>
+  <link rel="stylesheet" href="./style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2947810987379877" crossorigin="anonymous"></script>
 </head>
 <body>
-  <main class="page">
-    <section class="hero">
-      <div>
-        <span class="eyebrow">Partnership</span>
-        <h1>제휴 제안을<br>빠르게 받아보는 폼</h1>
-        <p class="lead">
-          브랜드 협업, 공동 프로모션, 유통 제휴, B2B 제안까지 한 번에 받을 수 있도록
-          간단한 문의 폼으로 정리했습니다.
-        </p>
-      </div>
+  <header class="site-header">
+    <div class="site-shell">
+      <a class="brand" href="./index.html">
+        <span class="brand-badge">PB</span>
+        <span>Product Builder</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 탐색">
+        <a href="./index.html" aria-current="page">홈</a>
+        <a href="./about.html">사이트 소개</a>
+        <a href="./privacy.html">개인정보 및 광고</a>
+        <a href="#contact">문의하기</a>
+      </nav>
+    </div>
+  </header>
 
-      <div class="points">
-        <div class="point">
-          <strong>무엇을 받나요</strong>
-          <span>브랜드 제휴, 캠페인 협업, 입점 문의, 제작 제안 등 실무형 문의</span>
-        </div>
-        <div class="point">
-          <strong>어떤 정보가 있으면 좋나요</strong>
-          <span>회사 소개, 제안 목적, 예상 일정, 희망 협업 방식이 있으면 검토가 빨라집니다.</span>
-        </div>
-        <div class="point">
-          <strong>응답 방식</strong>
-          <span>남겨주신 이메일 기준으로 회신합니다. 연락 가능한 주소를 정확히 입력해 주세요.</span>
-        </div>
+  <main>
+    <section class="hero">
+      <div class="site-shell hero-grid">
+        <article class="panel hero-copy">
+          <span class="eyebrow">Partnership Guide</span>
+          <h1>좋은 제휴는<br>좋은 정보에서 시작됩니다</h1>
+          <p class="lead">
+            Product Builder는 브랜드 협업, 유통 제안, 공동 제작, 프로모션 제안을
+            빠르게 받기 위한 단순 접수창이 아니라, 어떤 제안을 우선 검토하는지와
+            어떤 자료를 함께 보내면 실제 논의로 이어질 가능성이 높은지 정리해 둔
+            실무형 안내 페이지입니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">제휴 문의 보내기</a>
+            <a class="button button-secondary" href="#criteria">검토 기준 보기</a>
+          </div>
+          <div class="stat-list" aria-label="운영 요약">
+            <div class="stat-card">
+              <strong>4단계</strong>
+              <span>접수, 검토, 회신, 일정 협의 순으로 진행합니다.</span>
+            </div>
+            <div class="stat-card">
+              <strong>실무형</strong>
+              <span>아이디어보다 실행 가능한 정보와 일정의 선명도를 우선합니다.</span>
+            </div>
+            <div class="stat-card">
+              <strong>주제 집중</strong>
+              <span>제휴 안내, 검토 기준, 운영 원칙을 한 사이트 안에서 명확히 제공합니다.</span>
+            </div>
+            <div class="stat-card">
+              <strong>명시적 고지</strong>
+              <span>광고와 개인정보 처리 원칙을 분리해 안내합니다.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel hero-side">
+          <h2>이 사이트에서 확인할 수 있는 내용</h2>
+          <p>
+            방문자가 페이지를 열었을 때 바로 이해할 수 있도록, 이 사이트는 제휴 문의를
+            중심으로 필요한 정보만 정리합니다. 복잡한 기능보다 목적이 분명한 콘텐츠 구조를
+            우선했고, 실제 검토에 필요한 기준을 문장으로 직접 설명합니다.
+          </p>
+          <ul class="mini-list">
+            <li>어떤 제안을 받는지와 검토 우선순위</li>
+            <li>회신 가능성을 높이는 제안서 작성 팁</li>
+            <li>개인정보 수집 범위와 광고 정책 안내</li>
+            <li>방문자가 길을 잃지 않도록 단순한 탐색 구조 제공</li>
+          </ul>
+        </aside>
       </div>
     </section>
 
-    <section class="form-card">
-      <h2>제휴 문의 남기기</h2>
-      <p>아래 내용을 작성하면 Formspree로 전달됩니다. 필수 항목만 입력해도 제출 가능합니다.</p>
+    <section class="section">
+      <div class="site-shell">
+        <article class="panel section-panel" id="criteria">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Review Criteria</span>
+              <h2>제휴 검토 기준</h2>
+            </div>
+            <p>
+              승인 심사 관점에서도 중요한 것은 방문자가 얻는 정보의 질과 사이트의 목적이
+              선명한지 여부입니다. 그래서 아래 기준은 실제 문의 검토 기준이면서 동시에
+              방문자에게 이 사이트의 역할을 분명하게 설명하는 장치입니다.
+            </p>
+          </div>
+          <div class="info-grid">
+            <section class="info-card">
+              <h3>주제 적합성</h3>
+              <p>브랜드 협업, 입점, 공동 프로모션, 제작 제안처럼 제품과 사업 확장에 직접 연결되는 제안을 우선 검토합니다.</p>
+            </section>
+            <section class="info-card">
+              <h3>정보의 구체성</h3>
+              <p>회사 소개, 목표, 일정, 예산 범위, 기대 결과가 포함된 제안은 실무 판단이 빨라집니다.</p>
+            </section>
+            <section class="info-card">
+              <h3>사용자 가치</h3>
+              <p>단순 홍보보다 고객 경험, 유통 효율, 브랜드 신뢰를 실제로 높이는 제안인지 중점적으로 봅니다.</p>
+            </section>
+          </div>
+        </article>
 
-      <form action="https://formspree.io/f/xpqyrvka" method="POST" accept-charset="UTF-8">
-        <input type="hidden" name="_subject" value="새 제휴 문의가 도착했습니다">
-        <input type="hidden" name="_language" value="ko">
+        <article class="panel section-panel">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Why Quality Matters</span>
+              <h2>좋은 사이트처럼 보여야 하는 이유</h2>
+            </div>
+            <p>
+              광고 승인 여부를 떠나, 방문자는 이 페이지를 보고 신뢰 여부를 먼저 판단합니다.
+              따라서 이 사이트는 문의 폼 하나만 두지 않고, 검토 원칙과 설명형 콘텐츠를 함께 제공합니다.
+            </p>
+          </div>
+          <div class="trust-grid">
+            <section class="trust-card">
+              <h3>명확한 목적</h3>
+              <p>방문자가 들어오자마자 이 사이트가 제휴 문의 접수와 안내를 위한 곳이라는 점을 알 수 있도록 구성했습니다.</p>
+            </section>
+            <section class="trust-card">
+              <h3>탐색 가능성</h3>
+              <p>홈, 사이트 소개, 개인정보 및 광고 안내를 분리해 필요한 정보를 쉽게 찾을 수 있게 했습니다.</p>
+            </section>
+            <section class="trust-card">
+              <h3>설명형 콘텐츠</h3>
+              <p>짧은 문구만 나열하지 않고, 무엇을 받는지와 왜 그런 기준을 두는지 문장으로 직접 설명합니다.</p>
+            </section>
+          </div>
+        </article>
 
-        <div class="field-grid">
-          <label>
-            이름
-            <input type="text" name="name" placeholder="홍길동" required>
-          </label>
+        <article class="panel section-panel">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">FAQ</span>
+              <h2>자주 묻는 질문</h2>
+            </div>
+            <p>실제 문의 전에 자주 확인하는 내용을 먼저 정리했습니다. 짧은 사이트일수록 이런 기본 정보가 승인과 신뢰에 모두 중요합니다.</p>
+          </div>
+          <div class="faq-grid">
+            <section class="faq-card">
+              <h3>모든 문의에 회신하나요</h3>
+              <p>가능한 한 검토하지만, 정보가 부족하거나 사이트 목적과 무관한 제안은 회신이 지연되거나 생략될 수 있습니다.</p>
+            </section>
+            <section class="faq-card">
+              <h3>어떤 자료가 가장 중요한가요</h3>
+              <p>회사 소개서, 목표 고객, 제안 배경, 예상 일정, 협업 방식, 희망 KPI가 핵심입니다.</p>
+            </section>
+            <section class="faq-card">
+              <h3>개인정보는 어떻게 처리하나요</h3>
+              <p>문의 회신에 필요한 범위에서만 사용하며, 상세 내용은 개인정보 및 광고 안내 페이지에 별도로 정리해 두었습니다.</p>
+            </section>
+          </div>
+        </article>
 
-          <label>
-            회사명
-            <input type="text" name="company" placeholder="회사 또는 브랜드명">
-          </label>
-        </div>
+        <article class="panel section-panel" id="contact">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Contact</span>
+              <h2>제휴 문의 보내기</h2>
+            </div>
+            <p>
+              실제 논의까지 이어지려면 간결하면서도 필요한 정보는 빠지지 않아야 합니다.
+              아래 폼은 실무 검토에 필요한 기본 항목만 받도록 구성했습니다.
+            </p>
+          </div>
+          <div class="form-layout">
+            <form action="https://formspree.io/f/xpqyrvka" method="POST" accept-charset="UTF-8">
+              <input type="hidden" name="_subject" value="새 제휴 문의가 도착했습니다">
+              <input type="hidden" name="_language" value="ko">
 
-        <div class="field-grid">
-          <label>
-            이메일
-            <input type="email" name="email" placeholder="name@company.com" required>
-          </label>
+              <div class="field-grid">
+                <label>
+                  이름
+                  <input type="text" name="name" placeholder="홍길동" required>
+                </label>
+                <label>
+                  회사명
+                  <input type="text" name="company" placeholder="회사 또는 브랜드명">
+                </label>
+              </div>
 
-          <label>
-            문의 유형
-            <select name="inquiry_type" required>
-              <option value="">선택해 주세요</option>
-              <option value="brand-collaboration">브랜드 협업</option>
-              <option value="distribution">유통 및 입점</option>
-              <option value="promotion">프로모션 제휴</option>
-              <option value="production">공동 제작</option>
-              <option value="other">기타</option>
-            </select>
-          </label>
-        </div>
+              <div class="field-grid">
+                <label>
+                  이메일
+                  <input type="email" name="email" placeholder="name@company.com" required>
+                </label>
+                <label>
+                  문의 유형
+                  <select name="inquiry_type" required>
+                    <option value="">선택해 주세요</option>
+                    <option value="brand-collaboration">브랜드 협업</option>
+                    <option value="distribution">유통 및 입점</option>
+                    <option value="promotion">프로모션 제휴</option>
+                    <option value="production">공동 제작</option>
+                    <option value="other">기타</option>
+                  </select>
+                </label>
+              </div>
 
-        <label>
-          연락처
-          <input type="text" name="phone" placeholder="010-0000-0000">
-        </label>
+              <label>
+                연락처
+                <input type="text" name="phone" placeholder="010-0000-0000">
+              </label>
 
-        <label>
-          문의 내용
-          <textarea name="message" placeholder="회사 소개, 제안 배경, 원하는 협업 방식, 일정 등을 적어 주세요." required></textarea>
-        </label>
+              <label>
+                문의 내용
+                <textarea name="message" placeholder="회사 소개, 제안 배경, 일정, 협업 방식, 기대 효과를 적어 주세요." required></textarea>
+              </label>
 
-        <p class="hint">제출 시 입력한 정보가 이메일로 전달됩니다. 민감한 개인정보는 필요한 범위에서만 적어 주세요.</p>
+              <p class="hint">
+                제출 시 입력한 정보는 문의 검토와 회신에 사용됩니다. 민감한 개인정보는 필요한 범위에서만 작성해 주세요.
+              </p>
+              <button type="submit">제휴 문의 보내기</button>
+            </form>
 
-        <button type="submit">제휴 문의 보내기</button>
-      </form>
+            <aside class="policy-box">
+              <h3>빠른 검토를 위한 체크리스트</h3>
+              <ul>
+                <li>회사 또는 브랜드의 핵심 소개가 들어가 있는가</li>
+                <li>왜 지금 협업이 필요한지 목적이 분명한가</li>
+                <li>원하는 협업 형태와 일정이 구체적인가</li>
+                <li>이 제안이 사용자 또는 고객에게 어떤 가치를 주는가</li>
+              </ul>
+              <h3>운영 원칙</h3>
+              <p>
+                이 사이트는 과도한 문구나 자동 생성된 느낌보다, 방문자가 실제로 이해할 수 있는
+                설명과 탐색 편의성을 우선합니다. 광고가 표시되더라도 콘텐츠 목적은 제휴 안내와
+                운영 정보 제공에 있습니다.
+              </p>
+            </aside>
+          </div>
+        </article>
+
+        <article class="panel comments-panel">
+          <span class="eyebrow">Community</span>
+          <h2>의견 남기기</h2>
+          <p class="lead">
+            제휴 제안과 별도로 사이트 구성에 대한 의견이나 보완 요청을 남길 수 있도록 댓글 영역을 제공합니다.
+          </p>
+          <div id="disqus_thread"></div>
+          <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+        </article>
+      </div>
     </section>
   </main>
 
-  <section class="comments-card">
-    <h2>댓글</h2>
-    <p>문의 폼과 별도로 의견이나 피드백을 남길 수 있는 Disqus 댓글 영역입니다.</p>
-    <div id="disqus_thread"></div>
-    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-  </section>
+  <footer class="site-footer">
+    <div class="site-shell footer-grid">
+      <div>
+        <strong>Product Builder</strong>
+        <p>
+          이 사이트는 제휴 문의 접수와 운영 정책 안내를 목적으로 운영됩니다.
+          방문자가 목적을 쉽게 이해하고 필요한 정보를 바로 찾을 수 있도록 단순하고 분명한 구조를 유지합니다.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html">홈</a>
+        <a href="./about.html">사이트 소개</a>
+        <a href="./privacy.html">개인정보 및 광고</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     /*
