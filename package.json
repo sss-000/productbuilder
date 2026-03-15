@@ -1,0 +1,16 @@
+{
+  "name": "vc",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "vite project"
+  ],
+  "description": "Static site local server",
+  "scripts": {
+    "start": "node server.js",
+    "build": "npm run build --workspace vite-project"
+  },
+  "devDependencies": {
+    "wrangler": "^4.73.0"
+  }
+}
