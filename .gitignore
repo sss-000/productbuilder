@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+node_modules/
+vite project/node_modules/
+vite project/dist/
+next/
